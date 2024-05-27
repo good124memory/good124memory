@@ -1,0 +1,55 @@
+name: Literature Review Model
+
+on:
+  push:
+    branches:
+      - main
+  # 允许手动触发
+  workflow_dispatch:
+
+jobs:
+  literature-review:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install some-sci-biblio-tool
+
+    - name: Search and filter literature
+      run: |
+        # 假设 'search_literature.py' 是一个脚本，用于搜索和筛选文献
+        python search_literature.py
+
+    - name: Extract and organize data
+      run: |
+        # 假设 'organize_data.py' 是一个脚本，用于从文献中提取信息并组织
+        python organize_data.py
+
+    - name: Generate visualization
+      run: |
+        # 使用图表生成工具，如 'draw_visualization.py'
+        python draw_visualization.py
+
+    - name: Write and update review
+      run: |
+        # 自动化撰写综述的部分内容
+        python write_review.py
+
+    - name: Citation management
+      run: |
+        # 使用引用管理工具
+        python manage_citations.py
+
+    - name: Notify for review
+      run: |
+        # 发送通知或提醒，以便人工审阅
+        python notify_for_review.py
